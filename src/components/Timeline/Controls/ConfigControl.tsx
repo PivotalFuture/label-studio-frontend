@@ -35,6 +35,7 @@ export const ConfigControl: FC<ConfigControlProps> = ({
   const playbackSpeed = speed ?? 1;
   const [isTimeline, setTimeline] = useState(true);
   const [isAudioWave, setAudioWave] = useState(true);
+  const [isSpectrogram, setSpectrogram] = useState(true);
 
   useEffect(() => {
     if (layerVisibility) {
@@ -56,6 +57,12 @@ export const ConfigControl: FC<ConfigControlProps> = ({
     toggleVisibility?.('waveform', !isAudioWave);
     toggleVisibility?.('regions', !isAudioWave);
   };
+
+  const handleSetSpectogram = () => {
+    setSpectrogram(!isSpectrogram)
+    toggleVisibility?.('spectrogram', !isSpectrogram)
+  }
+
 
   const handleChangePlaybackSpeed = (e: React.FormEvent<HTMLInputElement>) => {
     const _playbackSpeed = parseFloat(e.currentTarget.value);
@@ -85,6 +92,12 @@ export const ConfigControl: FC<ConfigControlProps> = ({
           onClick={handleSetAudioWave}
         >
           { isAudioWave ? 'Hide' : 'Show' } audio wave
+        </Elem>
+        <Elem
+          name="menu-button"
+          onClick={handleSetSpectogram}
+        >
+          { isSpectrogram ? 'Hide' : 'Show' } spectrogram
         </Elem>
       </Elem>
     );
